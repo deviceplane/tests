@@ -8,5 +8,6 @@
 
 @test "SSH into device" {
   startTest
+  testSSH
   stopTest
 }

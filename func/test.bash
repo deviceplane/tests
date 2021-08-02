@@ -17,3 +17,11 @@ function testInstallAgent(){
   journalctl -u deviceplane-agent > "$log_file"
   [ -z "$(cat "$log_file" | grep "error")" ]
 }
+
+function testSSH(){
+  [ ! -z "$(dplane device list | grep online)" ]
+  device="$(dplane device list | grep online | awk 'NR==1 {print; exit}' | awk '{print $2}')"
+  [ ! -z "$device" ]
+  echo "testing" > "/tmp/$device"
+  dplane ssh "$device" cat "/tmp/$device"
+}

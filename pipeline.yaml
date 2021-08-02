@@ -44,3 +44,11 @@ jobs:
       sed -i "s|TT_PROJECT=.*|TT_PROJECT=\"$(project)\"|g" ./conf/env.sh
       ./run.bash install_agent 
     displayName: 'Test: install agent'
+
+  - bash: |
+      set -e
+      cp ./env.sh ./conf/env.sh
+      sed -i "s|TT_PROJECT=.*|TT_PROJECT=\"$(project)\"|g" ./conf/env.sh
+      sed -i "s|TT_ACCESS_KEY=.*|TT_ACCESS_KEY=\"$(cli.access_key)\"|g" ./conf/env.sh
+      ./run.bash ssh 
+    displayName: 'Test: ssh'
