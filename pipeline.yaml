@@ -14,8 +14,8 @@ variables:
   build: $(Build.BuildId)
   ref: $(Build.SourceBranch)
   branch: $(Build.SourceBranchName)
-  version:
-  cli.version: latest
+  cli.version: "3.0.0"
+  agent.version: "1.18.0"
 
 jobs:
 - job: Linux
@@ -31,6 +31,13 @@ jobs:
 
   - bash: |
       set -e
-      sed -i "s|CLI_VERSION=.*|CLI_VERSION=\"$(cli.version)\"|g" ./env.sh
-      ./run.bash install 
-    displayName: 'Test: install'
+      sed -i "s|TT_CLI_VERSION=.*|TT_CLI_VERSION=\"$(cli.version)\"|g" ./env.sh
+      ./run.bash install_cli 
+    displayName: 'Test: install cli'
+
+  - bash: |
+      set -e
+      sed -i "s|TT_AGENT_VERSION=.*|TT_AGENT_VERSION=\"$(agent.version)\"|g" ./env.sh
+      sed -i "s|TT_REGISTRATION_TOKEN=.*|TT_REGISTRATION_TOKEN=\"$(agent.registration_token)\"|g" ./env.sh
+      ./run.bash install_agent 
+    displayName: 'Test: install agent'

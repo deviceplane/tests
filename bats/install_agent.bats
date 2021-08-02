@@ -6,7 +6,8 @@
   stopTest
 }
 
-@test "SSH into device" {
+@test "Install Agent" {
   startTest
+  testInstallAgent
   stopTest
 }

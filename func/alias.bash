@@ -26,3 +26,8 @@ function stopTest(){
     rm "$FILE"
   fi
 }
+
+# dplane uses variables from conf/env.sh to run the cli
+function dplane(){
+  deviceplane --project="$CLI_PROJECT" --access-key="$CLI_PROJECT" $@
+}

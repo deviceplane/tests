@@ -1,16 +1,23 @@
 #!/bin/sh
 
-######## These variables MUST be updated by the user / automation task
-export CLI_VERSION="latest"
+export TT_CONTROLLER_BASE_URL="https://cloud.dev.deviceplane.com/api"
+export TT_PROJECT=""
+export TT_ACCESS_KEY=""
+
+######## cli
+export TT_CLI_VERSION=""
 ######################################################################
 
-######## These variables can be left with their defaults if necessary
+######## agent
+export TT_AGENT_VERSION=""
+export TT_REGISTRATION_TOKEN=""
 ######################################################################
+
 
 echo ""
 echo "----- CONFIG -----"
 echo ""
-echo "${!CLI_VERSION*}: " "$CLI_VERSION"
+printenv | grep TT_
 echo ""
 echo "------------------"
 echo ""
