@@ -1,0 +1,36 @@
+trigger:
+  tags:
+    include:
+    - v*
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+    - CHANGELOG.md
+
+variables:
+  build: $(Build.BuildId)
+  ref: $(Build.SourceBranch)
+  branch: $(Build.SourceBranchName)
+  version:
+  cli.version: latest
+
+jobs:
+- job: Linux
+  pool:
+    vmImage: 'Ubuntu-18.04'
+
+  steps:
+
+  - bash: |
+      set -e
+      ./bootstrap.bash
+    displayName: 'Bootstrap'
+
+  - bash: |
+      set -e
+      sed -i "s|CLI_VERSION=.*|CLI_VERSION=\"$(cli.version)\"|g" ./env.sh
+      ./run.bash install 
+    displayName: 'Test: install'
