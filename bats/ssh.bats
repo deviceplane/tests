@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. test/func/include.bash
+. ./func/include.bash
 
 @test "Initialize tests" {
   stopTest
