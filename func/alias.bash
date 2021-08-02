@@ -29,5 +29,5 @@ function stopTest(){
 
 # dplane uses variables from conf/env.sh to run the cli
 function dplane(){
-  deviceplane --project="$TT_PROJECT" --access-key="$TT_ACCESS_KEY" $@
+  deviceplane --url="$TT_CONTROLLER_BASE_URL" --project="$TT_PROJECT" --access-key="$TT_ACCESS_KEY" $@
 }
