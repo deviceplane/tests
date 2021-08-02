@@ -38,7 +38,9 @@ jobs:
 
   - bash: |
       set -e
+      cp ./env.sh ./conf/env.sh
       sed -i "s|TT_AGENT_VERSION=.*|TT_AGENT_VERSION=\"$(agent.version)\"|g" ./conf/env.sh
       sed -i "s|TT_REGISTRATION_TOKEN=.*|TT_REGISTRATION_TOKEN=\"$(agent.registration_token)\"|g" ./conf/env.sh
+      sed -i "s|TT_PROJECT=.*|TT_PROJECT=\"$(project)\"|g" ./conf/env.sh
       ./run.bash install_agent 
     displayName: 'Test: install agent'
