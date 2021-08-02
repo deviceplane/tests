@@ -14,8 +14,8 @@ variables:
   build: $(Build.BuildId)
   ref: $(Build.SourceBranch)
   branch: $(Build.SourceBranchName)
-  cli.version: "3.0.0"
-  agent.version: "1.18.0"
+  dp.cli.version: "3.0.0"
+  dp.agent.version: "1.18.0"
 
 jobs:
 - job: Linux
@@ -32,14 +32,14 @@ jobs:
   - bash: |
       set -e
       cp ./env.sh ./conf/env.sh
-      sed -i "s|TT_CLI_VERSION=.*|TT_CLI_VERSION=\"$(cli.version)\"|g" ./conf/env.sh
+      sed -i "s|TT_CLI_VERSION=.*|TT_CLI_VERSION=\"$(dp.cli.version)\"|g" ./conf/env.sh
       ./run.bash install_cli 
     displayName: 'Test: install cli'
 
   - bash: |
       set -e
       cp ./env.sh ./conf/env.sh
-      sed -i "s|TT_AGENT_VERSION=.*|TT_AGENT_VERSION=\"$(agent.version)\"|g" ./conf/env.sh
+      sed -i "s|TT_AGENT_VERSION=.*|TT_AGENT_VERSION=\"$(dp.agent.version)\"|g" ./conf/env.sh
       sed -i "s|TT_REGISTRATION_TOKEN=.*|TT_REGISTRATION_TOKEN=\"$(agent.registration_token)\"|g" ./conf/env.sh
       sed -i "s|TT_PROJECT=.*|TT_PROJECT=\"$(project)\"|g" ./conf/env.sh
       ./run.bash install_agent 
