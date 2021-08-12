@@ -15,6 +15,7 @@ function testInstallAgent(){
   CONTROLLER="$TT_CONTROLLER_BASE_URL" VERSION="$TT_AGENT_VERSION" REGISTRATION_TOKEN="$TT_REGISTRATION_TOKEN" PROJECT="$TT_PROJECT" ./install.sh
   log_file="/tmp/tt_logs.txt"
   journalctl -u deviceplane-agent > "$log_file"
+  systemctl status deviceplane-agent.service >> "$log_file"
   [ -z "$(cat "$log_file" | grep "error")" ]
 }
 
