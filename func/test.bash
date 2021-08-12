@@ -16,6 +16,7 @@ function testInstallAgent(){
   log_file="/tmp/tt_logs.txt"
   journalctl -u deviceplane-agent > "$log_file"
   systemctl status deviceplane-agent.service >> "$log_file"
+  cat "$log_file"
   [ -z "$(cat "$log_file" | grep "error")" ]
 }
 
